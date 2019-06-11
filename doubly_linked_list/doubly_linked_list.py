@@ -93,6 +93,8 @@ class DoublyLinkedList:
         else:
             if node != self.tail:
                 node.next.prev = node.prev
+            else:
+                self.tail = node.prev
             node.prev.next = node.next
             node.next = self.head
             node.next.prev = node
@@ -104,6 +106,8 @@ class DoublyLinkedList:
         else:
             if node != self.head:
                 node.prev.next = node.next
+            else:
+                self.head = node.next
             node.next.prev = node.prev
             node.prev = self.tail
             node.prev.next = node
@@ -119,4 +123,5 @@ class DoublyLinkedList:
             self.length -= 1
 
     def get_max(self):
+        # max = float("-inf")
         pass
