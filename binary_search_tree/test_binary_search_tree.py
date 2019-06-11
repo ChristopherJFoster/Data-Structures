@@ -6,26 +6,21 @@ from binary_search_tree import BinarySearchTree
 class BinarySearchTreeTests(unittest.TestCase):
     def setUp(self):
         self.bst = BinarySearchTree(5)
-        print('5')
 
     def test_insert(self):
         self.bst.insert(2)
-        print('2')
         self.bst.insert(3)
-        print('3')
         self.bst.insert(7)
-        print('7')
         self.bst.insert(6)
-        print('6')
         self.assertEqual(self.bst.left.right.value, 3)
         self.assertEqual(self.bst.right.left.value, 6)
 
-    # def test_contains(self):
-    #     self.bst.insert(2)
-    #     self.bst.insert(3)
-    #     self.bst.insert(7)
-    #     self.assertTrue(self.bst.contains(7))
-    #     self.assertFalse(self.bst.contains(8))
+    def test_contains(self):
+        self.bst.insert(2)
+        self.bst.insert(3)
+        self.bst.insert(7)
+        self.assertTrue(self.bst.contains(7))
+        self.assertFalse(self.bst.contains(8))
 
     # def test_get_max(self):
     #     self.assertEqual(self.bst.get_max(), 5)

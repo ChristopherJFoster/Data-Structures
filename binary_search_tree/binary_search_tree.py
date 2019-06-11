@@ -7,14 +7,12 @@ class BinarySearchTree:
     def insert(self, value):
         while True:
             if value < self.value:
-                # print('less')
                 if self.left == None:
                     self.left = BinarySearchTree(value)
                     break
                 else:
                     return self.left.insert(value)
             else:
-                # print('more')
                 if self.right == None:
                     self.right = BinarySearchTree(value)
                     break
@@ -22,7 +20,19 @@ class BinarySearchTree:
                     return self.right.insert(value)
 
     def contains(self, target):
-        pass
+        while True:
+            if target == self.value:
+                return True
+            if target < self.value:
+                if self.left == None:
+                    return False
+                else:
+                    return self.left.contains(target)
+            if target > self.value:
+                if self.right == None:
+                    return False
+                else:
+                    return self.right.contains(target)
 
     def get_max(self):
         pass
