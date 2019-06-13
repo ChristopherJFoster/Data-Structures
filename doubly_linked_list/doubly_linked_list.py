@@ -1,3 +1,5 @@
+import copy
+
 """Each ListNode holds a reference to its previous node as well as its next node in the List."""
 
 
@@ -30,6 +32,7 @@ class ListNode:
             self.prev.next = self.next
         if self.next:
             self.next.prev = self.prev
+        return self.value
 
 
 """Our doubly-linked list class. It holds references to the list's head and tail nodes."""
@@ -108,12 +111,12 @@ class DoublyLinkedList:
 
     def delete(self, node):
         if self.head == node:
-            self.remove_from_head()
+            return self.remove_from_head()
         elif self.tail == node:
-            self.remove_from_tail()
+            return self.remove_from_tail()
         else:
-            node.delete(node)
             self.length -= 1
+            return node.delete(node)
 
     def get_max(self):
         def rec_val(node, max=None):
