@@ -8,10 +8,6 @@ Answer the following questions for each of the data structures you implemented a
 
 2. What is the runtime complexity of `dequeue`?
 
-   (I think:)
-   Since we always pop the first element of the queue's storage list, the time and space complexities are each `O(1)`.
-
-   (But maybe:)
    Since each element after the first in the queue's storage list will have to be shifted when the first element is popped, the time complexity is `O(n)`, where n is the number of elements in the list. The space complexity is `O(1)`.
 
 3) What is the runtime complexity of `len`?
@@ -60,51 +56,46 @@ Answer the following questions for each of the data structures you implemented a
 
 1. What is the runtime complexity of `ListNode.insert_after`?
 
-   (I think:)
-   The time and space complexities are each `O(1)`.
+   Since we must know the node reference already (and don't have to search for it), and since we are just updating a few next and prev references, the time and space complexities are each `O(1)`.
 
 2. What is the runtime complexity of `ListNode.insert_before`?
 
-   (I think:)
-   The time and space complexities are each `O(1)`.
+   The time and space complexities are each `O(1)`, for the same reasons as `ListNode.insert_after`.
 
 3. What is the runtime complexity of `ListNode.delete`?
 
-   (I think:)
-   The time and space complexities are each `O(1)`.
+   The time and space complexities are each `O(1)`, for the same reasons as `ListNode.insert_after`.
 
 4. What is the runtime complexity of `DoublyLinkedList.add_to_head`?
 
-   The time and space complexities are each `O(1)`.
+   Since this is just a special insert, the time and space complexities are each `O(1)`, for the same reasons as `ListNode.insert_after`.
 
 5. What is the runtime complexity of `DoublyLinkedList.remove_from_head`?
 
-   The time and space complexities are each `O(1)`.
+   Since this is just a special delete, the time and space complexities are each `O(1)`, for the same reasons as `ListNode.insert_after`.
 
 6. What is the runtime complexity of `DoublyLinkedList.add_to_tail`?
 
-   The time and space complexities are each `O(1)`.
+   Since this is just a special insert, the time and space complexities are each `O(1)`, for the same reasons as `ListNode.insert_after`.
 
 7. What is the runtime complexity of `DoublyLinkedList.remove_from_tail`?
 
-   The time and space complexities are each `O(1)`.
+   Since this is just a special delete, the time and space complexities are each `O(1)`, for the same reasons as `ListNode.insert_after`.
 
 8. What is the runtime complexity of `DoublyLinkedList.move_to_front`?
 
-   (I think:)
-   The time and space complexities are each `O(1)`.
+   This is sort of like a delete and then an insert, so the time and space complexities are still each `O(1)`, for the same reasons as `ListNode.insert_after`.
 
 9. What is the runtime complexity of `DoublyLinkedList.move_to_end`?
 
-   (I think:)
-   The time and space complexities are each `O(1)`.
+   Similar to `DoublyLinkedList.move_to_front`, the time and space complexities are eact `O(1)`.
 
 10. What is the runtime complexity of `DoublyLinkedList.delete`?
 
-    (I think:)
-    The time and space complexities are each `O(1)`.
+    Since we must know the node reference already (and don't have to search for it), the time and space complexities are each O(1).
 
     a. Compare the runtime of the doubly linked list's `delete` method with the worst-case runtime of the JS `Array.splice` method. Which method generally performs better?
 
-    (I think:)
-    Since the time and space complexities of `DoublyLinkedList.delete` are each `O(1)`, the worst-case runtime of `Array.splice` could only hope to perform as well as `DoublyLinkedList.delete`, but will usually perform worse.
+    When `Array.splice` removes an element, it must shift over all the elements after the removed one. In a worst-case scenario, it removes the first element and must shift over every other element, for O(n) time complexity. Space complexity would still be O(1).
+
+    Therefore, `DoublyLinkedList.delete` should generally perform better than a delete performed with `Array.splice`.
