@@ -65,26 +65,16 @@ class AVLTree:
     def update_balance(self):
         if self.node.left and self.node.right:
             self.balance = self.node.left.update_height() - self.node.right.update_height()
-            # print('left height: ', self.node.left.update_height())
-            # print('right height: ', self.node.right.update_height())
-            # if self.node.right.node.left:
-            #     print('R L height: ', self.node.right.node.left.update_height())
-            #     print('R L L height: ',
-            #           self.node.right.node.left.node.left.update_height())
-            #     print('R L R height: ',
-            #           self.node.right.node.left.node.right.update_height())
-            #     print('R L L key: ',
-            #           self.node.right.node.left.node.left.node.key)
-            #     print('R L R key: ',
-            #           self.node.right.node.left.node.right.node.key)
-            #     print('R R height: ', self.node.right.node.right.update_height())
-            # print('Both: ', self.node.key, self.balance)
+            return self.balance
         elif self.node.left and not self.node.right:
             self.balance = self.node.left.update_height() + 1
+            return self.balance
         elif self.node.right and not self.node.left:
             self.balance = -1 - self.node.right.update_height()
+            return self.balance
         else:
             self.balance = 0
+            return self.balance
 
     """
     Perform a left rotation, making the right child of this node the parent and making the old parent the left child of the new parent.
@@ -97,19 +87,14 @@ class AVLTree:
             temp_node.right = self.node.left.node.right.node.left
             self.node.left = self.node.left.node.right
             self.node.left.node.left = AVLTree(temp_node)
-            # delete?
-            self.node.left.node.right.node.left = None
-            self.node.left.node.right.node.right = None
+            self.rebalance()
         else:
             temp_node = Node(self.node.key)
             temp_node.left = self.node.left
             temp_node.right = self.node.right.node.left
             self.node = self.node.right.node
             self.node.left = AVLTree(temp_node)
-            # delete?
-            self.node.left.node.left.node.left = None
-            self.node.left.node.left.node.right = None
-        self.rebalance()
+            self.rebalance()
 
     """
     Perform a right rotation, making the left child of this node the parent and making the old parent the right child of the new parent.
@@ -122,19 +107,14 @@ class AVLTree:
             temp_node.right = self.node.right.node.right
             self.node.right = self.node.right.node.left
             self.node.right.node.right = AVLTree(temp_node)
-            # delete?
-            self.node.right.node.left.node.left = None
-            self.node.right.node.left.node.right = None
+            self.rebalance()
         else:
             temp_node = Node(self.node.key)
             temp_node.left = self.node.left.node.right
             temp_node.right = self.node.right
             self.node = self.node.left.node
             self.node.right = AVLTree(temp_node)
-            # delete?
-            self.node.right.node.right.node.left = None
-            self.node.right.node.right.node.right = None
-        self.rebalance()
+            self.rebalance()
 
     """
     Sets in motion the rebalancing logic to ensure the tree is balanced such that the balance factor is 1 or -1
@@ -144,12 +124,12 @@ class AVLTree:
         self.update_height()
         self.update_balance()
         if self.balance > 1:
-            if self.node.left.balance == -1:
+            if self.node.left.update_balance() == -1:
                 self.left_rotate()
             else:
                 self.right_rotate()
         elif self.balance < -1:
-            if self.node.right.balance == 1:
+            if self.node.right.update_balance() == 1:
                 self.right_rotate()
             else:
                 self.left_rotate()
